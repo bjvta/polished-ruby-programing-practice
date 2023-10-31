@@ -85,5 +85,27 @@ end
 
 
 
+## Third approach
+
+albums = {}
+
+album_infos.each do |album, track, artist|
+  album_array = albums[album] ||= [[]]
+  album_array[0] << artist
+  (album_array[track] ||= []) << artist
+end
+print(albums)
+albums.each_value do |array|
+  array[0].uniq!
+end
+
+lookup = -> (album, track=0) do
+  albums.dig(album, track)
+end
+
+# example5 = lookup.call("Album 9", 8)
+# print(example5)
+# example6 = lookup.call("Album 10")
+# print(example6)
 
 
